@@ -27,11 +27,12 @@ public class Main {
 
 
         //3.1 Using Java Stream API print names (in alphabetic order) of all books that have price smaller than 100.
-        Stream.of(book1,book2,book3,book4,book5).sorted(Comparator.comparing(Book::getName)).filter(i->i.getPrice()<100).forEach(A->System.out.println(A.getName()));
+        Stream.of(book1,book2,book3,book4,book5).sorted(Comparator.comparing(Book::getName)).filter(i->i.getPrice()<100).forEach(A->System.out.println("Book with price smaller than 100: "+A.getName()));
 
 
         //3.2 Using Java stream API find out how many books have name shorter than 5 characters.
-        Stream.of(book1,book2,book3,book4,book5).filter(i->i.getName().length()<5).forEach(A->System.out.println(A.getName()));
+        Long sumofBooks=Stream.of(book1,book2,book3,book4,book5).filter(i->i.getName().length()<5).count();
+        System.out.println(sumofBooks);
 
 
         //3.3 Using Java stream API find out what is the average price of the book in the list
