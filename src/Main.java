@@ -7,19 +7,18 @@ public class Main {
     public static void main(String[] args) {
         //1. Using Java Stream API find out sum of all numbers between 1 and 10000 that are dividable by both 3 and 5 but not dividable by 7
 
-        int sum =IntStream.range(1,1001)
+        int sum =IntStream.range(1,1000)
                 .filter(i -> (i%3 == 0)&&(i%5==0)&&(i%7!=0))
                 .sum();
 
 
         //2. Using Java Stream API print first 100 even numbers that are not dividable by 8
-        IntStream.range(1,101)
-                .filter(i -> (i%2 == 0)&&(i%8!=0))
-                .forEach(A->System.out.println("Even number not dividable by 8: "+A));
+
+       Stream.iterate(0, n -> n + 2).filter(i -> (i%8!=0)).limit(100).forEach(A->System.out.println("Even number not dividable by 8: "+A));
 
         //3.Lets assume we have the following class Book:
 
-        Book book1=new Book("Bylinky",500);
+        Book book1=new Book("Bylinky",499);
         Book book2=new Book("Abeceda",80);
         Book book3=new Book("Book",300);
         Book book4=new Book("Kucharka",100);
@@ -27,12 +26,15 @@ public class Main {
 
 
         //3.1 Using Java Stream API print names (in alphabetic order) of all books that have price smaller than 100.
-        Stream.of(book1,book2,book3,book4,book5).sorted(Comparator.comparing(Book::getName)).filter(i->i.getPrice()<100).forEach(A->System.out.println("Book with price smaller than 100: "+A.getName()));
+        Stream.of(book1,book2,book3,book4,book5)
+                .sorted(Comparator.comparing(Book::getName))
+                .filter(i->i.getPrice()<100)
+                .forEach(A->System.out.println("Book with price smaller than 100: "+A.getName()));
 
 
         //3.2 Using Java stream API find out how many books have name shorter than 5 characters.
-        Long sumofBooks=Stream.of(book1,book2,book3,book4,book5).filter(i->i.getName().length()<5).count();
-        System.out.println(sumofBooks);
+        Long sumOfBooks=Stream.of(book1,book2,book3,book4,book5).filter(i->i.getName().length()<5).count();
+//        System.out.println(sumOfBooks);
 
 
         //3.3 Using Java stream API find out what is the average price of the book in the list
